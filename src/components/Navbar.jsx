@@ -14,7 +14,7 @@ import Home from "../pages/Home";
 import Onchain from "../pages/Onchain";
 import Offchain from "../pages/Offchain";
 import Faq from "../pages/Faq";
-import About from "../pages/About";
+import Examples from "../pages/Examples";
 import Contact from "../pages/Contact";
 import NoPage from "../pages/NoPage";
 
@@ -24,7 +24,15 @@ function NavBarComponent() {
       <>
         <Navbar collapseOnSelect expand="sm" bg="light" className="mb-3">
           <Container fluid>
-            {/* <Navbar.Brand href="#">HIP412 Validator</Navbar.Brand> */}
+            <Navbar.Brand href="#home">
+              <img
+                src="/logo192.png"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+                alt="HIP412 logo"
+              />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-sm`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-sm`}
@@ -42,7 +50,7 @@ function NavBarComponent() {
                   <Nav.Link as={Link} to={"/onchain"}>NFT validation</Nav.Link>
                   <Nav.Link as={Link} to={"/metadata"}>Metadata validation</Nav.Link>
                   <Nav.Link as={Link} to={"/faq"}>FAQ</Nav.Link>
-                  <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
+                  <Nav.Link as={Link} to={"/examples"}>Examples</Nav.Link>
                   <Nav.Link as={Link} to={"/contact"}>Contact</Nav.Link>
                 </Nav>
               </Offcanvas.Body>
@@ -55,7 +63,7 @@ function NavBarComponent() {
         <Route path="/onchain" element={<Onchain/>} />
         <Route path="/metadata" element={<Offchain />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/examples" element={<Examples />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
