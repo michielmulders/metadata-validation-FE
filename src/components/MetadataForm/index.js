@@ -2,9 +2,7 @@ import React, { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-
-import MetadataList from "../MetadataList";
-import ErrorList from "../ErrorList";
+import ValidationResults from "../ValidationResults";
 
 import API from "../../api";
 
@@ -16,6 +14,7 @@ const MetadataFormValidation = () => {
   const [formErrors, setFormErrors] = useState({});
   const [validationErrors, setValidationErrors] = useState({
     errors: [],
+    warnings: [],
     visible: false,
     success: false,
     metadata: {},
@@ -60,6 +59,7 @@ const MetadataFormValidation = () => {
           visible: true,
           success: data.success,
           errors: data.data.errors,
+          warnings: data.data.warnings,
           metadata: data.data.metadata,
           errorMsg: ""
         })
@@ -114,21 +114,5 @@ const MetadataFormValidation = () => {
     </div>
   );
 };
-
-const ValidationResults = ({validationErrors}) => {
-  return (
-    <div>
-      {validationErrors.visible && !validationErrors.success && !!!validationErrors.errorMsg &&
-        <ErrorList errors={validationErrors.errors} />
-      }
-      {validationErrors.visible && validationErrors.success && !!!validationErrors.errorMsg &&
-        <MetadataList metadata={validationErrors.metadata} />
-      }
-      {validationErrors.visible && !!validationErrors.errorMsg &&
-        <p><strong>Error while validating your NFT:</strong> {validationErrors.errorMsg}</p>
-      }
-    </div>
-  );
-}
 
 export default MetadataFormValidation;

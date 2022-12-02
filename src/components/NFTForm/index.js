@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-import MetadataList from "../MetadataList";
-import ErrorList from "../ErrorList";
+import ValidationResults from "../ValidationResults";
 
 import API from "../../api";
 
@@ -18,6 +17,7 @@ const NFTFormValidation = () => {
   const [formErrors, setFormErrors] = useState({});
   const [validationErrors, setValidationErrors] = useState({
     errors: [],
+    warnings: [],
     visible: false,
     success: false,
     metadata: {},
@@ -60,11 +60,13 @@ const NFTFormValidation = () => {
     } else {
       try {
         const { data } = await API.NFTs.validate(form.tokenId, form.serial, form.network, form.version);
+        console.log(data)
         setValidationErrors({
           ...validationErrors,
           visible: true,
           success: data.success,
           errors: data.data.errors,
+          warnings: data.data.warnings,
           metadata: data.data.metadata,
           errorMsg: ""
         })
@@ -144,21 +146,5 @@ const NFTFormValidation = () => {
     </div>
   );
 };
-
-const ValidationResults = ({validationErrors}) => {
-  return (
-    <div>
-      {validationErrors.visible && !validationErrors.success && !!!validationErrors.errorMsg &&
-        <ErrorList errors={validationErrors.errors} />
-      }
-      {validationErrors.visible && validationErrors.success && !!!validationErrors.errorMsg &&
-        <MetadataList metadata={validationErrors.metadata} />
-      }
-      {validationErrors.visible && !!validationErrors.errorMsg &&
-        <p><strong>Error while validating your NFT:</strong> {validationErrors.errorMsg}</p>
-      }
-    </div>
-  );
-}
 
 export default NFTFormValidation;

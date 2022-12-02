@@ -15,9 +15,7 @@ const MetadataList = ({metadata}) => {
         {metadata.files && <p><strong>Files:</strong> {JSON.stringify(metadata.files)}</p>}
         {metadata.attributes && <p><strong>Attributes:</strong> {JSON.stringify(metadata.attributes)}</p>}
         {metadata.localization && <p><strong>Localization:</strong> {JSON.stringify(metadata.localization)}</p>}
-  
       </div>
-     
     );
 }
 
