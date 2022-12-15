@@ -60,7 +60,6 @@ const NFTFormValidation = () => {
     } else {
       try {
         const { data } = await API.NFTs.validate(form.tokenId, form.serial, form.network, form.version);
-        console.log(data)
         setValidationErrors({
           ...validationErrors,
           visible: true,
